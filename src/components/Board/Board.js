@@ -25,12 +25,21 @@ const Board = () => {
   };
 
   const onChangeHandler = (index) => {
-    const gameIsCompleted = blocks.every((value) => value !== null);
-    const currentMove = lastMove === MOVES.O ? MOVES.X : MOVES.O;
-
     if (gameOver) {
       return;
     }
+
+    const currentMove = lastMove === MOVES.O ? MOVES.X : MOVES.O;
+    const _blocks = [...blocks];
+
+    if (_blocks[index] === null) {
+      _blocks[index] = currentMove;
+      setBlocks(_blocks);
+    } else {
+      return;
+    }
+
+    const gameIsCompleted = _blocks.every((value) => value !== null);
 
     if (gameIsCompleted) {
       setGameOver(true);
@@ -38,17 +47,12 @@ const Board = () => {
       return;
     }
 
-    if (!gameIsCompleted && blocks[index] === null) {
-      const blocksCopy = [...blocks];
-      blocksCopy[index] = currentMove;
-      setBlocks(blocksCopy);
-      if (isWinningMove(blocksCopy, index)) {
-        setGameOver(true);
-        setWinner(WINNERS[currentMove]);
-        return;
-      }
-      setLastMove(currentMove);
+    if (isWinningMove(_blocks, index)) {
+      setGameOver(true);
+      setWinner(WINNERS[currentMove]);
+      return;
     }
+    setLastMove(currentMove);
   };
 
   const reset = () => {
