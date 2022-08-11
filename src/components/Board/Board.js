@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import css from "./Board.module.scss";
 import { MOVES, WINNERS, WINNING_MOVES } from "constants";
-import Square from "components/Square/Square.js";
+import Block from "components/Block/Block.js";
 import { boundClassNames } from "utilities";
 
 const initialState = {
@@ -64,21 +64,21 @@ const Board = () => {
 
   return (
     <div className={boundClassNames("container mt-4", css["board-container"])}>
-      <div className={css["square-container"]}>
+      <div className={css["block-container"]}>
         <div className="row">
-          <Square value={blocks[0]} onChange={() => onChangeHandler(0)} />
-          <Square value={blocks[1]} onChange={() => onChangeHandler(1)} />
-          <Square value={blocks[2]} onChange={() => onChangeHandler(2)} />
+          <Block value={blocks[0]} onChange={() => onChangeHandler(0)} />
+          <Block value={blocks[1]} onChange={() => onChangeHandler(1)} />
+          <Block value={blocks[2]} onChange={() => onChangeHandler(2)} />
         </div>
         <div className="row">
-          <Square value={blocks[3]} onChange={() => onChangeHandler(3)} />
-          <Square value={blocks[4]} onChange={() => onChangeHandler(4)} />
-          <Square value={blocks[5]} onChange={() => onChangeHandler(5)} />
+          <Block value={blocks[3]} onChange={() => onChangeHandler(3)} />
+          <Block value={blocks[4]} onChange={() => onChangeHandler(4)} />
+          <Block value={blocks[5]} onChange={() => onChangeHandler(5)} />
         </div>
         <div className="row">
-          <Square value={blocks[6]} onChange={() => onChangeHandler(6)} />
-          <Square value={blocks[7]} onChange={() => onChangeHandler(7)} />
-          <Square value={blocks[8]} onChange={() => onChangeHandler(8)} />
+          <Block value={blocks[6]} onChange={() => onChangeHandler(6)} />
+          <Block value={blocks[7]} onChange={() => onChangeHandler(7)} />
+          <Block value={blocks[8]} onChange={() => onChangeHandler(8)} />
         </div>
       </div>
       {winner && (
