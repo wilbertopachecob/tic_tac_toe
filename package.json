@@ -57,8 +57,17 @@
     ],
     "rules": {
       "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn"
-    }
+      "react-hooks/exhaustive-deps": "warn",
+      "no-undef": "off"
+    },
+    "overrides": [
+      {
+        "files": ["*.ts", "*.tsx"],
+        "rules": {
+          "no-undef": "off"
+        }
+      }
+    ]
   },
   "prettier": {
     "semi": true,
