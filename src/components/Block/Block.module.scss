@@ -1,9 +1,188 @@
 .block {
-    border: 1px solid black;
-    width: 50px;
-    height: 50px;    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bolder;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-color);
+  border: 2px solid var(--border-color);
+  border-radius: calc(var(--border-radius) - 4px);
+  aspect-ratio: 1;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+
+  // Hover effects for empty blocks
+  &:not(.filled):hover {
+    transform: scale(1.05);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-md);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(245, 158, 11, 0.05) 100%);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%);
+      opacity: 0;
+      animation: pulse 1.5s infinite;
+    }
+  }
+
+  // Focus styles for accessibility
+  &:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    transform: scale(1.02);
+  }
+
+  // Active state
+  &:active:not(.filled) {
+    transform: scale(0.98);
+  }
+
+  // Filled block styles
+  &.filled {
+    cursor: default;
+    border-width: 3px;
+    animation: popIn 0.3s ease-out;
+
+    &:hover {
+      transform: none;
+    }
+  }
+
+  // Player-specific styles
+  &.xPlayer {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+
+    .value {
+      text-shadow: 0 2px 4px rgba(99, 102, 241, 0.3);
+    }
+  }
+
+  &.oPlayer {
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+
+    .value {
+      text-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
+    }
+  }
+
+  // Winning block styles
+  &.winning {
+    border-color: #10b981;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0.1) 100%);
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    animation: winningGlow 1s ease-in-out infinite alternate;
+
+    .value {
+      color: #10b981;
+      text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+    }
+  }
+
+  // Value styling
+  .value {
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: 1;
+    user-select: none;
+    transition: var(--transition);
+  }
+
+  // Responsive design
+  @media (max-width: 768px) {
+    font-size: 1.75rem;
+    border-width: 2px;
+
+    &.filled {
+      border-width: 2px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+    border-width: 1px;
+
+    &.filled {
+      border-width: 2px;
+    }
+  }
+}
+
+// Animations
+@keyframes popIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes winningGlow {
+  0% {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+  }
+}
+
+// Disabled state for filled blocks
+.block.filled {
+  pointer-events: none;
+}
+
+// Loading state (if needed for future features)
+.block.loading {
+  cursor: wait;
+  opacity: 0.7;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid var(--border-color);
+    border-top: 2px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

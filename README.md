@@ -1,70 +1,130 @@
-# Getting Started with Create React App
+# 🎮 Tic Tac Toe Game
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive Tic Tac Toe game built with React. Features a clean UI, smooth animations, and an intuitive user experience.
 
-## Available Scripts
+![Tic Tac Toe Game](https://img.shields.io/badge/React-18.3.1-blue?logo=react)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Version](https://img.shields.io/badge/Version-1.0.0-orange)
+
+## ✨ Features
+
+- 🎯 **Classic Gameplay**: Traditional 3x3 Tic Tac Toe with X and O players
+- 🎨 **Modern UI**: Clean, responsive design with smooth animations
+- 🔄 **Game State Management**: Tracks current player, game status, and winner
+- 🏆 **Win Detection**: Automatically detects winning combinations and ties
+- 🔄 **Reset Functionality**: Easy game restart with a single click
+- 📱 **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
+- ⚡ **Performance Optimized**: Built with modern React practices and hooks
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (version 16 or higher)
+- npm or yarn package manager
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/tic-tac-toe.git
+   cd tic-tac-toe
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm start
+   # or
+   yarn start
+   ```
+
+4. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000) to play the game!
+
+## 🎮 How to Play
+
+1. **Start the Game**: The game begins with player O
+2. **Take Turns**: Players alternate placing their symbol (X or O) on the board
+3. **Win Conditions**: Get three of your symbols in a row (horizontally, vertically, or diagonally)
+4. **Game End**: The game ends when someone wins or all squares are filled (tie)
+5. **Play Again**: Click "Start Again" to begin a new game
+
+## 🛠️ Available Scripts
 
 In the project directory, you can run:
 
 ### `npm start`
-
-Runs the app in the development mode.\
+Runs the app in development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
 ### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in interactive watch mode.
 
 ### `npm run build`
+Builds the app for production to the `build` folder.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `npm run lint`
+Runs ESLint to check for code quality issues.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `npm run lint:fix`
+Automatically fixes ESLint issues where possible.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `npm run format`
+Formats all code files using Prettier.
 
-### `npm run eject`
+### `npm run format:check`
+Checks if all files are properly formatted.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🏗️ Project Structure
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+src/
+├── components/
+│   ├── Block/           # Individual game square component
+│   └── Board/           # Main game board component
+├── constants.js         # Game constants and configurations
+├── utilities.js         # Utility functions
+├── App.js              # Main application component
+├── App.css             # Global styles
+└── index.js            # Application entry point
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🎨 Technologies Used
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **React 18.3.1** - Modern React with hooks
+- **SCSS Modules** - Scoped styling with CSS modules
+- **ESLint & Prettier** - Code quality and formatting
+- **Create React App** - Development environment
 
-## Learn More
+## 🤝 Contributing
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📝 License
 
-### Code Splitting
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🙏 Acknowledgments
 
-### Analyzing the Bundle Size
+- Built with [Create React App](https://github.com/facebook/create-react-app)
+- Icons and styling inspiration from modern design systems
+- Community feedback and suggestions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 📞 Support
 
-### Making a Progressive Web App
+If you have any questions or suggestions, please open an issue on GitHub or contact the maintainers.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Enjoy playing Tic Tac Toe! 🎮**
