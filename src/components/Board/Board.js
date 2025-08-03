@@ -9,7 +9,7 @@ import {
   MESSAGES,
 } from "../../constants";
 import Block from "../Block/Block.js";
-import { classNames, allEqual } from "../../utilities";
+import { allEqual } from "../../utilities";
 
 /**
  * Initial game state
