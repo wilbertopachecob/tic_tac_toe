@@ -89,16 +89,18 @@ src/
 ├── components/
 │   ├── Block/           # Individual game square component
 │   └── Board/           # Main game board component
-├── constants.js         # Game constants and configurations
-├── utilities.js         # Utility functions
-├── App.js              # Main application component
+├── constants.ts         # Game constants and configurations
+├── utilities.ts         # Utility functions
+├── types.ts            # TypeScript type definitions
+├── App.tsx             # Main application component
 ├── App.css             # Global styles
-└── index.js            # Application entry point
+└── index.tsx           # Application entry point
 ```
 
 ## 🎨 Technologies Used
 
 - **React 18.3.1** - Modern React with hooks
+- **TypeScript** - Type-safe JavaScript development
 - **SCSS Modules** - Scoped styling with CSS modules
 - **ESLint & Prettier** - Code quality and formatting
 - **Create React App** - Development environment
