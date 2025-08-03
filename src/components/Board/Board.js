@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useCallback, useMemo, useRef, useEffect } from "react";
 import css from "./Board.module.scss";
 import {
   PLAYERS,
@@ -20,6 +20,7 @@ const INITIAL_STATE = {
   gameStatus: GAME_STATUS.PLAYING,
   winner: GAME_RESULTS.IN_PROGRESS,
   winningBlocks: [],
+  moveCount: 0,
 };
 
 /**
@@ -28,6 +29,15 @@ const INITIAL_STATE = {
  */
 const Board = () => {
   const [gameState, setGameState] = useState(INITIAL_STATE);
+  const gameStatusRef = useRef(null);
+  const boardRef = useRef(null);
+
+  // Announce game status changes to screen readers
+  useEffect(() => {
+    if (gameStatusRef.current) {
+      gameStatusRef.current.focus();
+    }
+  }, [gameState.gameStatus, gameState.winner]);
 
   /**
    * Check if the current move results in a win
@@ -90,6 +100,7 @@ const Board = () => {
         gameStatus: GAME_STATUS.FINISHED,
         winner: gameState.currentPlayer,
         winningBlocks,
+        moveCount: prev.moveCount + 1,
       }));
       return;
     }
@@ -101,6 +112,7 @@ const Board = () => {
         blocks: newBlocks,
         gameStatus: GAME_STATUS.FINISHED,
         winner: GAME_RESULTS.TIE,
+        moveCount: prev.moveCount + 1,
       }));
       return;
     }
@@ -110,6 +122,7 @@ const Board = () => {
       ...prev,
       blocks: newBlocks,
       currentPlayer: prev.currentPlayer === PLAYERS.X ? PLAYERS.O : PLAYERS.X,
+      moveCount: prev.moveCount + 1,
     }));
   }, [gameState, checkWin, checkTie]);
 
@@ -118,6 +131,13 @@ const Board = () => {
    */
   const resetGame = useCallback(() => {
     setGameState(INITIAL_STATE);
+    // Focus the first block after reset for better accessibility
+    setTimeout(() => {
+      const firstBlock = boardRef.current?.querySelector('[role="button"]');
+      if (firstBlock) {
+        firstBlock.focus();
+      }
+    }, 100);
   }, []);
 
   /**
@@ -142,6 +162,24 @@ const Board = () => {
   }, [gameState.gameStatus, gameState.winner, gameState.currentPlayer]);
 
   /**
+   * Get detailed game status for screen readers
+   */
+  const getDetailedGameStatus = useMemo(() => {
+    const filledBlocks = gameState.blocks.filter(block => block !== null).length;
+    const remainingBlocks = BOARD_CONFIG.SIZE - filledBlocks;
+    
+    if (gameState.gameStatus === GAME_STATUS.FINISHED) {
+      if (gameState.winner === GAME_RESULTS.TIE) {
+        return `Game ended in a tie after ${gameState.moveCount} moves. All 9 squares are filled.`;
+      } else {
+        return `Game won by player ${gameState.winner} after ${gameState.moveCount} moves.`;
+      }
+    }
+    
+    return `Game in progress. ${filledBlocks} squares filled, ${remainingBlocks} squares remaining. Current player: ${gameState.currentPlayer}.`;
+  }, [gameState.gameStatus, gameState.winner, gameState.blocks, gameState.currentPlayer, gameState.moveCount]);
+
+  /**
    * Render game blocks
    */
   const renderBlocks = () => {
@@ -152,14 +190,41 @@ const Board = () => {
         onClick={() => handleBlockClick(index)}
         isWinningBlock={gameState.winningBlocks.includes(index)}
         index={index}
+        disabled={gameState.gameStatus === GAME_STATUS.FINISHED}
       />
     ));
   };
 
   return (
-    <div className={css.boardContainer}>
+    <div 
+      className={css.boardContainer}
+      role="main"
+      aria-labelledby="game-title"
+      aria-describedby="game-status"
+    >
+      {/* Hidden title for screen readers */}
+      <h1 id="game-title" className="sr-only">Tic Tac Toe Game</h1>
+      
+      {/* Live region for game status announcements */}
+      <div
+        ref={gameStatusRef}
+        id="game-status"
+        className="sr-only"
+        aria-live="polite"
+        aria-atomic="true"
+        tabIndex="-1"
+      >
+        {getDetailedGameStatus}
+      </div>
+
       <div className={css.gameInfo}>
-        <h2 className={css.gameMessage}>{gameMessage}</h2>
+        <h2 
+          className={css.gameMessage}
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          {gameMessage}
+        </h2>
         {gameState.gameStatus === GAME_STATUS.PLAYING && (
           <div className={css.currentPlayer}>
             Current Player: <span className={css.playerSymbol}>{gameState.currentPlayer}</span>
@@ -167,8 +232,25 @@ const Board = () => {
         )}
       </div>
 
-      <div className={css.board}>
-        <div className={css.boardGrid}>
+      <div 
+        className={css.board}
+        ref={boardRef}
+        role="application"
+        aria-label="Tic Tac Toe game board"
+        aria-describedby="game-instructions"
+      >
+        {/* Hidden instructions for screen readers */}
+        <div id="game-instructions" className="sr-only">
+          Tic Tac Toe game board with 9 squares arranged in a 3 by 3 grid. 
+          Click on any empty square to place your mark. 
+          Get three of your marks in a row horizontally, vertically, or diagonally to win.
+        </div>
+        
+        <div 
+          className={css.boardGrid}
+          role="grid"
+          aria-label="Game board grid"
+        >
           {renderBlocks()}
         </div>
       </div>
