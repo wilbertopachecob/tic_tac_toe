@@ -97,6 +97,20 @@ src/
 └── index.tsx           # Application entry point
 ```
 
+## 🔗 Path Aliases
+
+This project uses path aliases to simplify imports and avoid relative path issues. The `@/` alias is configured to point to the `src/` directory:
+
+- `@/*` → `src/*`
+
+**Examples:**
+- `@/components/Board/Board` → `src/components/Board/Board`
+- `@/types` → `src/types`
+- `@/constants` → `src/constants`
+- `@/utilities` → `src/utilities`
+
+This makes imports cleaner and more maintainable, eliminating the need for complex relative paths like `../../types`.
+
 ## 🎨 Technologies Used
 
 - **React 18.3.1** - Modern React with hooks

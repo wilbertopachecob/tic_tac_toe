@@ -1,7 +1,7 @@
 import React from "react";
-import type { BlockProps } from "../../types";
+import type { BlockProps } from "@/types";
 import css from "./Block.module.scss";
-import { classNames } from "../../utilities";
+import { classNames } from "@/utilities";
 
 /**
  * Block component representing a single square in the Tic Tac Toe game
