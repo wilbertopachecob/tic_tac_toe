@@ -75,7 +75,6 @@ const Block = ({ value, onClick, isWinningBlock = false, index, disabled = false
       role="gridcell"
       aria-label={getAriaLabel()}
       aria-describedby={`block-description-${index}`}
-      aria-pressed={value !== null}
       aria-disabled={disabled}
       data-index={index}
       data-position={getPositionDescription()}

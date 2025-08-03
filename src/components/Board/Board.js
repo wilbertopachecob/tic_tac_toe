@@ -261,7 +261,6 @@ const Board = () => {
             className={css.resetButton}
             onClick={resetGame}
             aria-label="Start a new game"
-            autoFocus
           >
             {MESSAGES.PLAY_AGAIN}
           </button>
