@@ -1,12 +1,14 @@
 import React from "react";
+import type { AppProps } from "./types";
 import "./App.css";
-import Board from "components/Board/Board.js";
+import Board from "components/Board/Board";
 
 /**
  * Main App component
- * @returns {JSX.Element} App component
+ * @param props - Component props
+ * @returns App component
  */
-const App = () => {
+const App: React.FC<AppProps> = () => {
   return (
     <div className="App">
       <header className="App-header">
@@ -23,4 +25,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App; 

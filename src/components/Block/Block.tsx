@@ -1,26 +1,27 @@
 import React from "react";
-import PropTypes from "prop-types";
+import type { BlockProps } from "../../types";
 import css from "./Block.module.scss";
 import { classNames } from "../../utilities";
 
 /**
  * Block component representing a single square in the Tic Tac Toe game
- * @param {Object} props - Component props
- * @param {string|null} props.value - The value displayed in the block (X, O, or null)
- * @param {Function} props.onClick - Function called when block is clicked
- * @param {boolean} props.isWinningBlock - Whether this block is part of the winning combination
- * @param {number} props.index - The index of this block in the board
- * @param {boolean} props.disabled - Whether the block is disabled (game finished)
- * @returns {JSX.Element} Block component
+ * @param props - Component props
+ * @returns Block component
  */
-const Block = ({ value, onClick, isWinningBlock = false, index, disabled = false }) => {
-  const handleClick = () => {
+const Block: React.FC<BlockProps> = ({ 
+  value, 
+  onClick, 
+  isWinningBlock = false, 
+  index, 
+  disabled = false 
+}) => {
+  const handleClick = (): void => {
     if (value === null && !disabled) {
       onClick();
     }
   };
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>): void => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       handleClick();
@@ -28,14 +29,14 @@ const Block = ({ value, onClick, isWinningBlock = false, index, disabled = false
   };
 
   // Get position description for screen readers
-  const getPositionDescription = () => {
+  const getPositionDescription = (): string => {
     const row = Math.floor(index / 3) + 1;
     const col = (index % 3) + 1;
     return `row ${row}, column ${col}`;
   };
 
   // Get detailed ARIA label
-  const getAriaLabel = () => {
+  const getAriaLabel = (): string => {
     const position = getPositionDescription();
     
     if (disabled) {
@@ -52,7 +53,7 @@ const Block = ({ value, onClick, isWinningBlock = false, index, disabled = false
   };
 
   // Get detailed ARIA description
-  const getAriaDescription = () => {
+  const getAriaDescription = (): string => {
     if (value) {
       return `This square contains ${value}. ${isWinningBlock ? 'This is part of the winning combination.' : ''}`;
     }
@@ -97,17 +98,4 @@ const Block = ({ value, onClick, isWinningBlock = false, index, disabled = false
   );
 };
 
-Block.propTypes = {
-  value: PropTypes.oneOf(["X", "O", null]),
-  onClick: PropTypes.func.isRequired,
-  isWinningBlock: PropTypes.bool,
-  index: PropTypes.number.isRequired,
-  disabled: PropTypes.bool,
-};
-
-Block.defaultProps = {
-  isWinningBlock: false,
-  disabled: false,
-};
-
-export default Block;
+export default Block; 

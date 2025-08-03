@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useMemo, useRef, useEffect } from "react";
+import type { BoardProps, GameState, BlockValue, Player } from "../../types";
 import css from "./Board.module.scss";
 import {
   PLAYERS,
@@ -8,13 +9,13 @@ import {
   BOARD_CONFIG,
   MESSAGES,
 } from "../../constants";
-import Block from "../Block/Block.js";
+import Block from "../Block/Block";
 import { allEqual } from "../../utilities";
 
 /**
  * Initial game state
  */
-const INITIAL_STATE = {
+const INITIAL_STATE: GameState = {
   blocks: Array(BOARD_CONFIG.SIZE).fill(null),
   currentPlayer: PLAYERS.O,
   gameStatus: GAME_STATUS.PLAYING,
@@ -25,12 +26,13 @@ const INITIAL_STATE = {
 
 /**
  * Board component - Main game container
- * @returns {JSX.Element} Board component
+ * @param props - Component props
+ * @returns Board component
  */
-const Board = () => {
-  const [gameState, setGameState] = useState(INITIAL_STATE);
-  const gameStatusRef = useRef(null);
-  const boardRef = useRef(null);
+const Board: React.FC<BoardProps> = () => {
+  const [gameState, setGameState] = useState<GameState>(INITIAL_STATE);
+  const gameStatusRef = useRef<HTMLDivElement>(null);
+  const boardRef = useRef<HTMLDivElement>(null);
 
   // Announce game status changes to screen readers
   useEffect(() => {
@@ -41,12 +43,16 @@ const Board = () => {
 
   /**
    * Check if the current move results in a win
-   * @param {Array} blocks - Current board state
-   * @param {number} moveIndex - Index of the last move
-   * @param {string} player - Player who made the move
-   * @returns {Object} Object containing win status and winning blocks
+   * @param blocks - Current board state
+   * @param moveIndex - Index of the last move
+   * @param player - Player who made the move
+   * @returns Object containing win status and winning blocks
    */
-  const checkWin = useCallback((blocks, moveIndex, player) => {
+  const checkWin = useCallback((
+    blocks: BlockValue[], 
+    moveIndex: number, 
+    player: Player
+  ): { isWin: boolean; winningBlocks: number[] } => {
     for (const combination of WINNING_COMBINATIONS) {
       if (combination.includes(moveIndex)) {
         const line = combination.map(index => blocks[index]);
@@ -63,18 +69,18 @@ const Board = () => {
 
   /**
    * Check if the game is a tie
-   * @param {Array} blocks - Current board state
-   * @returns {boolean} True if game is tied
+   * @param blocks - Current board state
+   * @returns True if game is tied
    */
-  const checkTie = useCallback((blocks) => {
+  const checkTie = useCallback((blocks: BlockValue[]): boolean => {
     return blocks.every(block => block !== null);
   }, []);
 
   /**
    * Handle block click
-   * @param {number} index - Index of the clicked block
+   * @param index - Index of the clicked block
    */
-  const handleBlockClick = useCallback((index) => {
+  const handleBlockClick = useCallback((index: number): void => {
     if (gameState.gameStatus === GAME_STATUS.FINISHED) {
       return;
     }
@@ -129,11 +135,11 @@ const Board = () => {
   /**
    * Reset the game to initial state
    */
-  const resetGame = useCallback(() => {
+  const resetGame = useCallback((): void => {
     setGameState(INITIAL_STATE);
     // Focus the first block after reset for better accessibility
     setTimeout(() => {
-      const firstBlock = boardRef.current?.querySelector('[role="button"]');
+      const firstBlock = boardRef.current?.querySelector('[role="gridcell"]') as HTMLElement;
       if (firstBlock) {
         firstBlock.focus();
       }
@@ -143,7 +149,7 @@ const Board = () => {
   /**
    * Get current game message
    */
-  const gameMessage = useMemo(() => {
+  const gameMessage = useMemo((): string => {
     if (gameState.gameStatus === GAME_STATUS.FINISHED) {
       switch (gameState.winner) {
         case GAME_RESULTS.X_WINS:
@@ -164,7 +170,7 @@ const Board = () => {
   /**
    * Get detailed game status for screen readers
    */
-  const getDetailedGameStatus = useMemo(() => {
+  const getDetailedGameStatus = useMemo((): string => {
     const filledBlocks = gameState.blocks.filter(block => block !== null).length;
     const remainingBlocks = BOARD_CONFIG.SIZE - filledBlocks;
     
@@ -182,7 +188,7 @@ const Board = () => {
   /**
    * Render game blocks
    */
-  const renderBlocks = () => {
+  const renderBlocks = (): JSX.Element[] => {
     return gameState.blocks.map((value, index) => (
       <Block
         key={index}
@@ -212,7 +218,7 @@ const Board = () => {
         className="sr-only"
         aria-live="polite"
         aria-atomic="true"
-        tabIndex="-1"
+        tabIndex={-1}
       >
         {getDetailedGameStatus}
       </div>
@@ -270,4 +276,4 @@ const Board = () => {
   );
 };
 
-export default Board;
+export default Board; 
