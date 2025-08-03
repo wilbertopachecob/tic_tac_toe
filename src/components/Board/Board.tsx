@@ -52,7 +52,7 @@ const Board: React.FC<BoardProps> = () => {
     blocks: BlockValue[], 
     moveIndex: number, 
     player: Player
-  ): { isWin: boolean; winningBlocks: number[] } => {
+  ): { isWin: boolean; winningBlocks: readonly number[] } => {
     for (const combination of WINNING_COMBINATIONS) {
       if (combination.includes(moveIndex)) {
         const line = combination.map(index => blocks[index]);

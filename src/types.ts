@@ -20,7 +20,7 @@ export interface GameState {
   currentPlayer: Player;
   gameStatus: GameStatus;
   winner: GameResult;
-  winningBlocks: number[];
+  winningBlocks: readonly number[];
   moveCount: number;
 }
 
@@ -89,7 +89,7 @@ export interface Messages {
 }
 
 // Winning combination type
-export type WinningCombination = number[];
+export type WinningCombination = readonly number[];
 
 // CSS module types
 export interface CSSModule {

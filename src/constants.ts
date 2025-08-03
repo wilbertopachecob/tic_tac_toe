@@ -1,4 +1,4 @@
-import type { Players, GameResults, GameStatuses, BoardConfig, Animations, Messages, WinningCombination } from './types';
+import type { Players, GameResults, GameStatuses, BoardConfig, Animations, Messages } from './types';
 
 /**
  * Game player symbols
@@ -30,7 +30,7 @@ export const GAME_STATUS: GameStatuses = {
  * Winning combinations for the game board
  * Each array represents the indices of a winning line
  */
-export const WINNING_COMBINATIONS: WinningCombination[] = [
+export const WINNING_COMBINATIONS: readonly (readonly number[])[] = [
   // Horizontal lines
   [0, 1, 2],
   [3, 4, 5],
