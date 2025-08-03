@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useMemo, useRef, useEffect } from "react";
-import type { BoardProps, GameState, BlockValue, Player } from "../../types";
+import type { BoardProps, GameState, BlockValue, Player } from "@/types";
 import css from "./Board.module.scss";
 import {
   PLAYERS,
@@ -8,9 +8,9 @@ import {
   WINNING_COMBINATIONS,
   BOARD_CONFIG,
   MESSAGES,
-} from "../../constants";
-import Block from "../Block/Block";
-import { allEqual } from "../../utilities";
+} from "@/constants";
+import Block from "@/components/Block/Block";
+import { allEqual } from "@/utilities";
 
 /**
  * Initial game state

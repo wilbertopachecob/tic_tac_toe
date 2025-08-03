@@ -1,7 +1,7 @@
 import React from "react";
-import type { AppProps } from "./types";
+import type { AppProps } from "@/types";
 import "./App.css";
-import Board from "components/Board/Board";
+import Board from "@/components/Board/Board";
 
 /**
  * Main App component
