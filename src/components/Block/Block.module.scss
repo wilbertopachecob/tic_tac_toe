@@ -16,7 +16,7 @@
   overflow: hidden;
 
   // Hover effects for empty blocks
-  &:not(.filled):hover {
+  &:not(.filled):not(.disabled):hover {
     transform: scale(1.05);
     border-color: var(--primary-color);
     box-shadow: var(--shadow-md);
@@ -36,14 +36,14 @@
   }
 
   // Focus styles for accessibility
-  &:focus {
+  &:focus-visible {
     outline: 2px solid var(--primary-color);
     outline-offset: 2px;
     transform: scale(1.02);
   }
 
   // Active state
-  &:active:not(.filled) {
+  &:active:not(.filled):not(.disabled) {
     transform: scale(0.98);
   }
 
@@ -55,6 +55,22 @@
 
     &:hover {
       transform: none;
+    }
+  }
+
+  // Disabled state
+  &.disabled {
+    cursor: default;
+    opacity: 0.7;
+    pointer-events: none;
+
+    &:hover {
+      transform: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--text-secondary);
+      outline-offset: 2px;
     }
   }
 
@@ -119,6 +135,41 @@
       border-width: 2px;
     }
   }
+
+  // High contrast mode support
+  @media (prefers-contrast: high) {
+    border-width: 3px;
+    
+    &.xPlayer {
+      border-color: #0000ff;
+      color: #0000ff;
+    }
+    
+    &.oPlayer {
+      border-color: #ff6600;
+      color: #ff6600;
+    }
+    
+    &.winning {
+      border-color: #000000;
+      background: #ffff00;
+      color: #000000;
+    }
+  }
+
+  // Reduced motion support
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    animation: none;
+    
+    &:hover {
+      transform: none;
+    }
+    
+    &:active {
+      transform: none;
+    }
+  }
 }
 
 // Animations
@@ -155,11 +206,6 @@
   100% {
     box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
   }
-}
-
-// Disabled state for filled blocks
-.block.filled {
-  pointer-events: none;
 }
 
 // Loading state (if needed for future features)
