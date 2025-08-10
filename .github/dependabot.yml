@@ -20,19 +20,10 @@ updates:
     labels:
       - "dependencies"
       - "automerge"
-    # Automerge rules
-    automerge: true
-    automerge-type: "squash"
     # Only allow automerge for patch and minor updates
     allow:
       - dependency-type: "direct"
-        update-type: "patch"
-      - dependency-type: "direct"
-        update-type: "minor"
       - dependency-type: "indirect"
-        update-type: "patch"
-      - dependency-type: "indirect"
-        update-type: "minor"
 
   # Enable version updates for GitHub Actions
   - package-ecosystem: "github-actions"
@@ -54,14 +45,6 @@ updates:
     labels:
       - "github-actions"
       - "automerge"
-    # Automerge rules for GitHub Actions
-    automerge: true
-    automerge-type: "squash"
     # Allow automerge for all GitHub Actions updates
     allow:
       - dependency-type: "direct"
-        update-type: "patch"
-      - dependency-type: "direct"
-        update-type: "minor"
-      - dependency-type: "direct"
-        update-type: "major"
