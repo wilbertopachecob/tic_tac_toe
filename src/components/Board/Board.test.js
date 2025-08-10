@@ -104,10 +104,9 @@ describe("Board Component", () => {
     expect(screen.getByText(/Current Player:/)).toBeInTheDocument();
     expect(screen.getByText("O")).toBeInTheDocument();
     
-    // Check that all blocks are empty by looking at the value spans
+    // Check that all blocks are empty by verifying they have the "Empty block" aria-label
     blocks.forEach((block, index) => {
-      const valueSpan = block.querySelector('.value');
-      expect(valueSpan).toHaveTextContent(""); // Value spans should be empty
+      expect(block).toHaveAttribute('aria-label', expect.stringContaining('Empty block'));
     });
   });
 }); 
