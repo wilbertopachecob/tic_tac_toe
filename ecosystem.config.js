@@ -4,7 +4,7 @@ module.exports = {
       name: 'tic-tac-toe-app',
       script: 'npx',
       args: 'serve -s build -l 3000',
-      cwd: '/Users/wilbertopachecobatista/Projects/tic_tac_toe',
+      cwd: process.cwd(),
       instances: 1,
       autorestart: true,
       watch: false,

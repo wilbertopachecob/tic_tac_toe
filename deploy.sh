@@ -2,6 +2,9 @@
 
 # Tic Tac Toe React App Deployment Script
 # This script builds the React app and deploys it using PM2
+# 
+# IMPORTANT: Make sure this script has executable permissions:
+# chmod +x deploy.sh
 
 set -e  # Exit on any error
 
