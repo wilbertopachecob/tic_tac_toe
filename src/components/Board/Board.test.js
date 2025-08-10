@@ -1,12 +1,12 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import Board from "./Board.js";
+import Board from "@/components/Board/Board";
 
 describe("Board Component", () => {
   test("renders game board with 9 blocks", () => {
     render(<Board />);
-    const blocks = screen.getAllByRole("button");
+    const blocks = screen.getAllByRole("gridcell");
     expect(blocks).toHaveLength(9);
   });
 
@@ -18,7 +18,7 @@ describe("Board Component", () => {
 
   test("allows players to make moves", () => {
     render(<Board />);
-    const blocks = screen.getAllByRole("button");
+    const blocks = screen.getAllByRole("gridcell");
     
     // First player (O) makes a move
     fireEvent.click(blocks[0]);
@@ -31,7 +31,7 @@ describe("Board Component", () => {
 
   test("prevents clicking on already filled blocks", () => {
     render(<Board />);
-    const blocks = screen.getAllByRole("button");
+    const blocks = screen.getAllByRole("gridcell");
     
     // First player makes a move
     fireEvent.click(blocks[0]);
@@ -44,7 +44,7 @@ describe("Board Component", () => {
 
   test("detects horizontal win", () => {
     render(<Board />);
-    const blocks = screen.getAllByRole("button");
+    const blocks = screen.getAllByRole("gridcell");
     
     // Player O wins horizontally (top row)
     fireEvent.click(blocks[0]); // O
@@ -58,7 +58,7 @@ describe("Board Component", () => {
 
   test("detects tie game", () => {
     render(<Board />);
-    const blocks = screen.getAllByRole("button");
+    const blocks = screen.getAllByRole("gridcell");
     
     // Create a tie scenario where no one wins
     // This pattern creates a tie: X O X, O X O, O X O
@@ -72,7 +72,7 @@ describe("Board Component", () => {
 
   test("shows reset button when game is over", () => {
     render(<Board />);
-    const blocks = screen.getAllByRole("button");
+    const blocks = screen.getAllByRole("gridcell");
     
     // Win the game
     fireEvent.click(blocks[0]); // O
@@ -87,7 +87,7 @@ describe("Board Component", () => {
 
   test("resets game when reset button is clicked", () => {
     render(<Board />);
-    const blocks = screen.getAllByRole("button");
+    const blocks = screen.getAllByRole("gridcell");
     
     // Win the game
     fireEvent.click(blocks[0]); // O
@@ -103,8 +103,10 @@ describe("Board Component", () => {
     // Check that game is reset
     expect(screen.getByText(/Current Player:/)).toBeInTheDocument();
     expect(screen.getByText("O")).toBeInTheDocument();
-    blocks.forEach(block => {
-      expect(block).toHaveTextContent(""); // All blocks should be empty
+    
+    // Check that all blocks are empty by verifying they have the "Empty block" aria-label
+    blocks.forEach((block, index) => {
+      expect(block).toHaveAttribute('aria-label', expect.stringContaining('Empty block'));
     });
   });
 }); 
