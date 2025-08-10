@@ -1,0 +1,67 @@
+version: 2
+updates:
+  # Enable version updates for npm
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "wilbertopachecobatista"
+    assignees:
+      - "wilbertopachecobatista"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "automerge"
+    # Automerge rules
+    automerge: true
+    automerge-type: "squash"
+    # Only allow automerge for patch and minor updates
+    allow:
+      - dependency-type: "direct"
+        update-type: "patch"
+      - dependency-type: "direct"
+        update-type: "minor"
+      - dependency-type: "indirect"
+        update-type: "patch"
+      - dependency-type: "indirect"
+        update-type: "minor"
+
+  # Enable version updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "wilbertopachecobatista"
+    assignees:
+      - "wilbertopachecobatista"
+    commit-message:
+      prefix: "ci"
+      prefix-development: "ci"
+      include: "scope"
+    labels:
+      - "github-actions"
+      - "automerge"
+    # Automerge rules for GitHub Actions
+    automerge: true
+    automerge-type: "squash"
+    # Allow automerge for all GitHub Actions updates
+    allow:
+      - dependency-type: "direct"
+        update-type: "patch"
+      - dependency-type: "direct"
+        update-type: "minor"
+      - dependency-type: "direct"
+        update-type: "major"
