@@ -1,0 +1,16 @@
+name = "tic-tac-toe-app"
+compatibility_date = "2024-01-01"
+
+[site]
+bucket = "./build"
+entry-point = "workers-site"
+
+[env.production]
+name = "tic-tac-toe-app-prod"
+
+[env.staging]
+name = "tic-tac-toe-app-staging"
+
+# Static site configuration
+[build]
+command = "npm run build"
