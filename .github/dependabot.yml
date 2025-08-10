@@ -20,10 +20,12 @@ updates:
     labels:
       - "dependencies"
       - "automerge"
-    # Only allow automerge for patch and minor updates
+    # Allow all update types for npm dependencies
     allow:
       - dependency-type: "direct"
+        update-type: "all"
       - dependency-type: "indirect"
+        update-type: "all"
 
   # Enable version updates for GitHub Actions
   - package-ecosystem: "github-actions"
@@ -45,6 +47,7 @@ updates:
     labels:
       - "github-actions"
       - "automerge"
-    # Allow automerge for all GitHub Actions updates
+    # Allow all update types for GitHub Actions
     allow:
       - dependency-type: "direct"
+        update-type: "all"
