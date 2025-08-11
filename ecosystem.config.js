@@ -3,7 +3,7 @@ module.exports = {
     {
       name: 'tic-tac-toe-app',
       script: 'npx',
-      args: 'serve -s build -l 3001 --single',
+      args: 'serve -s build -l 3001',
       cwd: process.cwd(),
       instances: 1,
       autorestart: true,
