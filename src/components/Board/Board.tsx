@@ -188,7 +188,7 @@ const Board: React.FC<BoardProps> = () => {
   /**
    * Render game blocks
    */
-  const renderBlocks = (): JSX.Element[] => {
+  const renderBlocks = (): React.JSX.Element[] => {
     return gameState.blocks.map((value, index) => (
       <Block
         key={index}
