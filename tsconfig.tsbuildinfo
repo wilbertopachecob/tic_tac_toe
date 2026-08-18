@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/constants.ts","./src/index.tsx","./src/reportwebvitals.js","./src/types.ts","./src/utilities.ts","./src/vite-env.d.ts","./src/components/block/block.tsx","./src/components/board/board.test.jsx","./src/components/board/board.tsx","./src/test/setup.ts"],"version":"5.9.3"}
