@@ -34,14 +34,12 @@ export interface BlockProps {
 }
 
 // Board component props interface
-export interface BoardProps {
-  // Currently no props needed, but keeping for future extensibility
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface BoardProps {}
 
 // App component props interface
-export interface AppProps {
-  // Currently no props needed, but keeping for future extensibility
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface AppProps {}
 
 // Utility function types
 export type ClassNamesFunction = (...classes: (string | undefined | null | false)[]) => string;

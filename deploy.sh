@@ -35,8 +35,8 @@ echo "🔨 Building the React app..."
 npm run build
 
 # Check if build was successful
-if [ ! -d "build" ]; then
-    echo "❌ Error: Build failed. build directory not found."
+if [ ! -d "dist" ]; then
+    echo "❌ Error: Build failed. dist directory not found."
     exit 1
 fi
 

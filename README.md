@@ -21,7 +21,7 @@ A modern, responsive Tic Tac Toe game built with React. Features a clean UI, smo
 ### Prerequisites
 
 - Node.js (version 16 or higher)
-- npm or yarn package manager
+- npm package manager
 
 ### Installation
 
@@ -34,15 +34,11 @@ A modern, responsive Tic Tac Toe game built with React. Features a clean UI, smo
 2. **Install dependencies**
    ```bash
    npm install
-   # or
-   yarn install
    ```
 
 3. **Start the development server**
    ```bash
    npm start
-   # or
-   yarn start
    ```
 
 4. **Open your browser**
@@ -61,14 +57,20 @@ A modern, responsive Tic Tac Toe game built with React. Features a clean UI, smo
 In the project directory, you can run:
 
 ### `npm start`
-Runs the app in development mode.\
+Runs the app in development mode via Vite.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ### `npm test`
-Launches the test runner in interactive watch mode.
+Launches Vitest in interactive watch mode.
+
+### `npm run test:ci`
+Runs all tests once with coverage output (used in CI).
 
 ### `npm run build`
-Builds the app for production to the `build` folder.
+Builds the app for production to the `dist` folder.
+
+### `npm run preview`
+Serves the production build locally for a final sanity check before deployment.
 
 ### `npm run lint`
 Runs ESLint to check for code quality issues.
@@ -117,7 +119,7 @@ This makes imports cleaner and more maintainable, eliminating the need for compl
 - **TypeScript** - Type-safe JavaScript development
 - **SCSS Modules** - Scoped styling with CSS modules
 - **ESLint & Prettier** - Code quality and formatting
-- **Create React App** - Development environment
+- **Vite** - Development server and production bundler
 
 ## 🤝 Contributing
 
@@ -133,7 +135,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- Built with [Create React App](https://github.com/facebook/create-react-app)
+- Built with [Vite](https://vitejs.dev) and [Vitest](https://vitest.dev)
 - Icons and styling inspiration from modern design systems
 - Community feedback and suggestions
 

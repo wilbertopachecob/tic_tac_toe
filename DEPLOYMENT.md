@@ -7,7 +7,7 @@ This document explains how to deploy the Tic Tac Toe React app using PM2 and Clo
 Before deploying, ensure you have the following installed:
 
 - Node.js (v16 or higher)
-- npm or yarn
+- npm
 - PM2 (`npm install -g pm2`)
 - Cloudflare CLI (`npm install -g wrangler`)
 
@@ -78,7 +78,7 @@ wrangler login
 npm run build
 
 # Deploy to Cloudflare
-wrangler pages deploy build --project-name=tic-tac-toe-app
+wrangler pages deploy dist --project-name=tic-tac-toe-app
 ```
 
 ### 3. Custom Domain (Optional)
