@@ -105,7 +105,7 @@ describe("Board Component", () => {
     expect(screen.getByText("O")).toBeInTheDocument();
     
     // Check that all blocks are empty by verifying they have the "Empty block" aria-label
-    blocks.forEach((block, index) => {
+    blocks.forEach((block) => {
       expect(block).toHaveAttribute('aria-label', expect.stringContaining('Empty block'));
     });
   });
