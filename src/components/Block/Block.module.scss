@@ -3,13 +3,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #241c17;
+  background: var(--surface-raised-color);
   border: 1px solid var(--border-color);
-  border-radius: calc(var(--border-radius) - 4px);
+  border-radius: var(--border-radius-sm);
   aspect-ratio: 1;
   cursor: pointer;
   transition: var(--transition);
-  font-family: 'Monoton', 'Impact', sans-serif;
+  font-family: var(--font-display);
   font-weight: 400;
   font-size: 1.9rem;
   color: var(--text-primary);
@@ -19,7 +19,7 @@
   &:not(.filled):not(.disabled):hover {
     transform: scale(1.04);
     border-color: var(--primary-color);
-    box-shadow: 0 0 4px rgba(255, 59, 92, 0.5), 0 0 16px rgba(255, 59, 92, 0.3);
+    box-shadow: var(--glow-primary-sm);
   }
 
   // Focus styles for accessibility
@@ -62,32 +62,32 @@
 
   // Player-specific styles
   &.xPlayer {
-    border-color: rgba(255, 59, 92, 0.5);
+    border-color: color-mix(in srgb, var(--primary-color) 50%, transparent);
     color: var(--primary-color);
 
     .value {
-      text-shadow: 0 0 4px rgba(255, 59, 92, 0.85), 0 0 16px rgba(255, 59, 92, 0.5);
+      text-shadow: var(--glow-primary-md);
     }
   }
 
   &.oPlayer {
-    border-color: rgba(45, 225, 199, 0.5);
+    border-color: color-mix(in srgb, var(--secondary-color) 50%, transparent);
     color: var(--secondary-color);
 
     .value {
-      text-shadow: 0 0 4px rgba(45, 225, 199, 0.85), 0 0 16px rgba(45, 225, 199, 0.5);
+      text-shadow: var(--glow-secondary-sm);
     }
   }
 
   // Winning block styles
   &.winning {
     border-color: var(--accent-color);
-    background: rgba(255, 201, 77, 0.08);
+    background: var(--tint-accent-soft);
     animation: winningGlow 1.4s ease-in-out infinite alternate;
 
     .value {
       color: var(--accent-color);
-      text-shadow: 0 0 6px rgba(255, 201, 77, 0.9), 0 0 20px rgba(255, 201, 77, 0.5);
+      text-shadow: var(--glow-accent-md);
     }
   }
 
@@ -109,24 +109,27 @@
     font-size: 1.35rem;
   }
 
-  // High contrast mode support
+  // High contrast mode support — tokens.css already swaps --primary-color /
+  // --secondary-color / --border-color / --text-primary to forced-contrast
+  // values under this same media query, so this block only adds what those
+  // tokens don't cover (border weight, the yellow winning highlight).
   @media (prefers-contrast: high) {
     border-width: 3px;
 
     &.xPlayer {
-      border-color: #0000ff;
-      color: #0000ff;
+      border-color: var(--primary-color);
+      color: var(--primary-color);
     }
 
     &.oPlayer {
-      border-color: #ff6600;
-      color: #ff6600;
+      border-color: var(--secondary-color);
+      color: var(--secondary-color);
     }
 
     &.winning {
-      border-color: #000000;
+      border-color: var(--border-color);
       background: #ffff00;
-      color: #000000;
+      color: var(--text-primary);
     }
   }
 
@@ -162,10 +165,10 @@
 
 @keyframes winningGlow {
   0% {
-    box-shadow: 0 0 10px rgba(255, 201, 77, 0.25);
+    box-shadow: var(--glow-accent-ring-from);
   }
   100% {
-    box-shadow: 0 0 22px rgba(255, 201, 77, 0.5);
+    box-shadow: var(--glow-accent-ring-to);
   }
 }
 

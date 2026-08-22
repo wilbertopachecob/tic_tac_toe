@@ -1,36 +1,8 @@
-/* Global styles and CSS variables */
-:root {
-  --primary-color: #ff3b5c;
-  --primary-hover: #ff6b85;
-  --secondary-color: #2de1c7;
-  --secondary-hover: #6ff3e0;
-  --accent-color: #ffc94d;
-  --background-color: #120e0c;
-  --surface-color: #1e1712;
-  --text-primary: #f5efe7;
-  --text-secondary: #9c8f80;
-  --border-color: rgba(245, 239, 231, 0.1);
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
-  --border-radius: 16px;
-  --transition: all 0.2s ease-in-out;
-}
+/* Color, type, shape and glow tokens live in ./styles/tokens.css — this
+   file only styles the App shell itself. */
 
 * {
   box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-    'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: var(--background-color);
-  color: var(--text-primary);
-  line-height: 1.6;
 }
 
 .App {
@@ -53,22 +25,19 @@ body {
   margin: 0 auto 0.75rem;
   border-radius: 50%;
   background: var(--surface-color);
-  border: 2px solid rgba(255, 59, 92, 0.5);
-  box-shadow: 0 0 4px rgba(255, 59, 92, 0.7), 0 0 18px rgba(255, 59, 92, 0.4);
+  border: 2px solid color-mix(in srgb, var(--primary-color) 50%, transparent);
+  box-shadow: var(--glow-primary-sm);
   animation: fadeInDown 0.6s ease-out;
 }
 
 .App-title {
   margin: 0 0 0.5rem 0;
-  font-family: 'Monoton', 'Impact', sans-serif;
+  font-family: var(--font-display);
   font-weight: 400;
   font-size: 2.75rem;
   letter-spacing: 0.03em;
   color: var(--primary-color);
-  text-shadow:
-    0 0 4px rgba(255, 59, 92, 0.85),
-    0 0 14px rgba(255, 59, 92, 0.55),
-    0 0 32px rgba(255, 59, 92, 0.3);
+  text-shadow: var(--glow-primary-lg);
   animation: fadeInDown 0.6s ease-out;
 }
 
@@ -117,18 +86,6 @@ body {
   outline-offset: 2px;
 }
 
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  :root {
-    --primary-color: #0000ff;
-    --secondary-color: #ff6600;
-    --text-primary: #000000;
-    --background-color: #ffffff;
-    --surface-color: #ffffff;
-    --border-color: #000000;
-  }
-}
-
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -161,15 +118,6 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
   }
 }
 

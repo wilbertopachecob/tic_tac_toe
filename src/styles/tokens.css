@@ -1,0 +1,91 @@
+/**
+ * Design tokens — "Night Diner Neon" theme.
+ *
+ * Single source of truth for color, glow, shape and motion. Component
+ * stylesheets should reference these custom properties instead of
+ * hardcoding hex/rgba values or re-composing the same glow shadow in
+ * more than one place. See /AGENTS.md for the rules this file backs.
+ *
+ * Alpha variants of a token color (borders, tints, glow layers) are
+ * derived with color-mix() from the base color below, so a palette
+ * change only ever happens in one place. color-mix() needs a
+ * reasonably modern browser (Chrome/Edge 111+, Safari 16.4+,
+ * Firefox 113+); unsupported browsers lose the glow decoration but
+ * keep legible flat colors, since color-mix() is only ever used
+ * inside shadow/tint layers, never as a base text or fill color.
+ */
+:root {
+  /* ---- Color ------------------------------------------------------ */
+  --primary-color: #ff3b5c; /* neon pink — X, primary actions */
+  --primary-hover: #ff6b85;
+  --secondary-color: #2de1c7; /* neon teal — O */
+  --secondary-hover: #6ff3e0;
+  --accent-color: #ffc94d; /* neon gold — win state, live readout */
+
+  --background-color: #120e0c; /* page background */
+  --surface-color: #1e1712; /* cards */
+  --surface-raised-color: #241c17; /* cells — sits above surface */
+  --text-primary: #f5efe7;
+  --text-secondary: #9c8f80;
+  --border-color: rgba(245, 239, 231, 0.1);
+
+  /* ---- Glow shadows -------------------------------------------------
+     Reusable across box-shadow and text-shadow (no spread value, so
+     both properties accept the same token). Name = color + intensity.
+     Add a new tier here rather than writing a one-off rgba() glow
+     inline in a component stylesheet. */
+  --glow-primary-sm: 0 0 4px color-mix(in srgb, var(--primary-color) 70%, transparent),
+    0 0 16px color-mix(in srgb, var(--primary-color) 40%, transparent);
+  --glow-primary-md: 0 0 6px color-mix(in srgb, var(--primary-color) 85%, transparent),
+    0 0 18px color-mix(in srgb, var(--primary-color) 50%, transparent);
+  --glow-primary-lg: 0 0 4px color-mix(in srgb, var(--primary-color) 85%, transparent),
+    0 0 14px color-mix(in srgb, var(--primary-color) 55%, transparent),
+    0 0 32px color-mix(in srgb, var(--primary-color) 30%, transparent);
+  --glow-primary-hover: 0 0 10px color-mix(in srgb, var(--primary-hover) 55%, transparent),
+    0 0 28px color-mix(in srgb, var(--primary-hover) 35%, transparent);
+  --glow-primary-ring: 0 0 0 1px color-mix(in srgb, var(--primary-color) 20%, transparent),
+    0 0 40px color-mix(in srgb, var(--primary-color) 15%, transparent);
+
+  --glow-secondary-sm: 0 0 4px color-mix(in srgb, var(--secondary-color) 85%, transparent),
+    0 0 16px color-mix(in srgb, var(--secondary-color) 50%, transparent);
+
+  --glow-accent-sm: 0 0 3px color-mix(in srgb, var(--accent-color) 70%, transparent),
+    0 0 16px color-mix(in srgb, var(--accent-color) 35%, transparent);
+  --glow-accent-md: 0 0 6px color-mix(in srgb, var(--accent-color) 90%, transparent),
+    0 0 20px color-mix(in srgb, var(--accent-color) 50%, transparent);
+  --glow-accent-ring-from: 0 0 10px color-mix(in srgb, var(--accent-color) 25%, transparent);
+  --glow-accent-ring-to: 0 0 22px color-mix(in srgb, var(--accent-color) 50%, transparent);
+  --tint-accent-soft: color-mix(in srgb, var(--accent-color) 8%, transparent);
+
+  /* ---- Elevation (non-glow, used for depth not color) -------------- */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+
+  /* ---- Type ---------------------------------------------------------
+     Display font is for short, iconic glyphs only (the "Tic Tac Toe"
+     title and the X/O marks) — see AGENTS.md before using it anywhere
+     copy can run long. */
+  --font-display: 'Monoton', 'Impact', sans-serif;
+  --font-body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+
+  /* ---- Shape & motion ------------------------------------------------ */
+  --border-radius: 16px;
+  --border-radius-sm: calc(var(--border-radius) - 4px);
+  --transition: all 0.2s ease-in-out;
+}
+
+/* High contrast mode support — forced flat colors, no glow layers. */
+@media (prefers-contrast: high) {
+  :root {
+    --primary-color: #0000ff;
+    --secondary-color: #ff6600;
+    --text-primary: #000000;
+    --background-color: #ffffff;
+    --surface-color: #ffffff;
+    --surface-raised-color: #ffffff;
+    --border-color: #000000;
+  }
+}
