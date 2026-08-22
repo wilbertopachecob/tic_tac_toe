@@ -9,7 +9,7 @@
     "tic-tac-toe",
     "typescript"
   ],
-  "author": "Your Name",
+  "author": "Wilberto Pacheco Batista",
   "license": "MIT",
   "dependencies": {
     "@testing-library/jest-dom": "^7.0.1",
