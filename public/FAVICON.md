@@ -13,10 +13,11 @@ This directory contains the custom favicon for the Tic Tac Toe game.
 
 The favicon features a Tic Tac Toe game board design with:
 
-- **Background**: Blue (#6366f1) matching the app's primary color
-- **Grid**: Subtle white lines creating a 3x3 game board
-- **X Symbols**: White crosses representing player X
-- **O Symbols**: Orange (#f59e0b) circles representing player O
+- **Background**: Near-black (#120e0c) matching the app's night-diner theme
+- **Ring**: A thin neon-pink outline, echoing the glowing card border in the app
+- **Grid**: Subtle warm-white lines creating a 3x3 game board
+- **X Symbols**: Neon pink (#ff3b5c) crosses representing player X
+- **O Symbols**: Neon teal (#2de1c7) circles representing player O
 - **Layout**: Strategic placement showing an active game state
 
 ## 🔧 Generation
