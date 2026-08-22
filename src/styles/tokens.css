@@ -1,10 +1,11 @@
 /**
  * Design tokens — "Night Diner Neon" theme.
  *
- * Single source of truth for color, glow, shape and motion. Component
- * stylesheets should reference these custom properties instead of
- * hardcoding hex/rgba values or re-composing the same glow shadow in
- * more than one place. See /AGENTS.md for the rules this file backs.
+ * This is the app's mini design system: color, glow, type scale,
+ * spacing scale, shape and motion. Component stylesheets should
+ * reference these custom properties instead of hardcoding a hex color,
+ * an rgba glow, a font-size, or a padding/gap/margin value. See
+ * /AGENTS.md for the rules this file backs.
  *
  * Alpha variants of a token color (borders, tints, glow layers) are
  * derived with color-mix() from the base color below, so a palette
@@ -70,6 +71,43 @@
   --font-body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
     'Helvetica Neue', sans-serif;
+
+  /* Type scale — step font-size through these instead of a one-off rem
+     value. Responsive rules should drop by one step (e.g. 4xl -> 3xl),
+     not to an arbitrary in-between size. */
+  --font-size-xs: 0.8rem; /* 12.8px */
+  --font-size-sm: 0.9rem; /* 14.4px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-md: 1.125rem; /* 18px */
+  --font-size-lg: 1.25rem; /* 20px */
+  --font-size-xl: 1.5rem; /* 24px */
+  --font-size-2xl: 1.875rem; /* 30px */
+  --font-size-3xl: 2.25rem; /* 36px */
+  --font-size-4xl: 2.75rem; /* 44px */
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  --letter-spacing-wide: 0.02em;
+  --letter-spacing-wider: 0.03em;
+
+  --line-height-tight: 1;
+  --line-height-base: 1.6;
+
+  /* ---- Spacing scale --------------------------------------------------
+     4px base grid. Use these for gap/padding/margin instead of an ad hoc
+     rem value — if nothing here fits, add a step rather than a one-off
+     value in a component file. (Component-intrinsic sizes — a badge's
+     diameter, a card's max-width — aren't spacing and stay literal.) */
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem; /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem; /* 24px */
+  --space-8: 2rem; /* 32px */
+  --space-10: 2.5rem; /* 40px */
 
   /* ---- Shape & motion ------------------------------------------------ */
   --border-radius: 16px;

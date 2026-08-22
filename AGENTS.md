@@ -51,9 +51,26 @@ by hand during iteration. Tokens prevent that drift.
   page title and the X/O marks) and `--font-body` (Space Grotesk — for
   everything else: subtitle, messages, buttons). Never introduce a third
   font family without updating tokens.css.
+- **Type scale** (`--font-size-xs` through `--font-size-4xl`): every
+  `font-size` in the app is one of these 9 steps — none are set as a raw
+  rem value in a component file. A responsive rule drops by exactly one
+  step (e.g. `--font-size-4xl` → `--font-size-3xl`), never to an arbitrary
+  in-between size. Also: `--font-weight-normal/medium/bold`,
+  `--letter-spacing-wide/wider`, `--line-height-tight/base`.
+- **Spacing scale** (`--space-1` through `--space-10`, a 4px grid): every
+  `padding`, `margin`, and `gap` in the app uses one of these steps. A
+  component's own intrinsic size (the badge's 56px diameter, the card's
+  500px max-width, the reset button's 150px min-width) is not spacing and
+  stays a literal value — don't force those onto the spacing scale.
 - **Shape/motion**: `--border-radius`, `--border-radius-sm`, `--shadow-sm/md/lg`
   (non-glow elevation, for things like the hard drop-shadow under the
   card), `--transition`.
+- **Not tokenized (known gap)**: the `768px`/`480px` responsive breakpoints
+  are repeated as literal values in each `@media` query. CSS custom
+  properties can't be used inside a media query condition without a
+  PostCSS plugin (`postcss-custom-media`), which this project doesn't have
+  set up. If that gap starts to bite, add the plugin rather than
+  approximating it with something like `calc()` tricks.
 
 ### High contrast and reduced motion
 
@@ -120,3 +137,9 @@ during the design session, not committed as project files.
 - Prefer `var(--token-name)` and `color-mix()` derivations over new literal
   colors. If grep finds a raw hex color or `rgba(` outside `tokens.css`,
   that's a signal it should probably be a token.
+- Same for spacing and type: if grep finds a raw `rem`/`px` value on
+  `font-size`, `font-weight`, `letter-spacing`, `padding`, `margin`, or
+  `gap` outside `tokens.css`, snap it to the nearest existing scale step
+  (`--font-size-*`, `--space-*`) rather than leaving it as a one-off. If
+  nothing on the scale is close, that's a sign to add a new step to
+  `tokens.css`, not to write a bespoke value in the component file.

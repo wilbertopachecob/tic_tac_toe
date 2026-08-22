@@ -10,8 +10,8 @@
   cursor: pointer;
   transition: var(--transition);
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 1.9rem;
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-2xl);
   color: var(--text-primary);
   overflow: hidden;
 
@@ -95,18 +95,18 @@
   .value {
     font-size: inherit;
     font-weight: inherit;
-    line-height: 1;
+    line-height: var(--line-height-tight);
     user-select: none;
     transition: var(--transition);
   }
 
   // Responsive design
   @media (max-width: 768px) {
-    font-size: 1.6rem;
+    font-size: var(--font-size-xl);
   }
 
   @media (max-width: 480px) {
-    font-size: 1.35rem;
+    font-size: var(--font-size-lg);
   }
 
   // High contrast mode support — tokens.css already swaps --primary-color /
