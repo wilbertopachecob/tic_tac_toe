@@ -7,6 +7,11 @@
 
 .App {
   min-height: 100vh;
+  /* Dynamic viewport height — accounts for mobile browser chrome
+     (address bar, nav bar) so the page never measures itself against
+     a taller viewport than what's actually visible without scrolling.
+     Falls back to 100vh above on browsers that don't support dvh. */
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -55,7 +60,6 @@
   justify-content: center;
   align-items: center;
   padding: var(--space-8) var(--space-4);
-  min-height: calc(100vh - 200px);
 }
 
 /* Screen reader only class */
@@ -143,6 +147,26 @@
 
   .App-main {
     padding: var(--space-2);
+  }
+}
+
+/* Short viewports (mobile browser chrome eating into the visible area) —
+   independent of width, since a narrow phone in portrait with the
+   address bar showing is exactly the case that needs this. Tightens
+   vertical rhythm so the whole card fits without a forced scroll. */
+@media (max-height: 700px) {
+  .App-header {
+    padding: var(--space-4) var(--space-4);
+  }
+
+  .App-badge {
+    width: 44px;
+    height: 44px;
+    margin: 0 auto var(--space-2);
+  }
+
+  .App-main {
+    padding: var(--space-2) var(--space-4);
   }
 }
 
