@@ -10,7 +10,7 @@ import {
   MESSAGES,
 } from "@/constants";
 import Block from "@/components/Block/Block";
-import { allEqual } from "@/utilities";
+import { allEqual, classNames } from "@/utilities";
 
 /**
  * Initial game state
@@ -261,17 +261,21 @@ const Board: React.FC<BoardProps> = () => {
         </div>
       </div>
 
-      {gameState.gameStatus === GAME_STATUS.FINISHED && (
-        <div className={css.gameOver}>
-          <button
-            className={css.resetButton}
-            onClick={resetGame}
-            aria-label="Start a new game"
-          >
-            {MESSAGES.PLAY_AGAIN}
-          </button>
-        </div>
-      )}
+      <div
+        className={classNames(
+          css.gameOver,
+          gameState.gameStatus === GAME_STATUS.FINISHED && css.visible
+        )}
+      >
+        <button
+          className={css.resetButton}
+          onClick={resetGame}
+          aria-label="Start a new game"
+          tabIndex={gameState.gameStatus === GAME_STATUS.FINISHED ? 0 : -1}
+        >
+          {MESSAGES.PLAY_AGAIN}
+        </button>
+      </div>
     </div>
   );
 };

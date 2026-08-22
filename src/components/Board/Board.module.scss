@@ -79,13 +79,26 @@
   }
 }
 
+// Always rendered (not conditionally mounted) so its box reserves layout
+// space from the start — the card doesn't grow/shift when the game ends.
+// visibility (rather than display:none) keeps that space reserved while
+// still removing the button from the tab order and the accessibility
+// tree until the game is actually over.
 .gameOver {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
   width: 100%;
-  animation: fadeIn 0.5s ease-out;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-out, visibility 0s linear 0.3s;
+
+  &.visible {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.3s ease-out 0.15s, visibility 0s linear 0s;
+  }
 }
 
 .resetButton {
