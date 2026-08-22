@@ -1,35 +1,8 @@
-/* Global styles and CSS variables */
-:root {
-  --primary-color: #6366f1;
-  --primary-hover: #4f46e5;
-  --secondary-color: #f59e0b;
-  --secondary-hover: #d97706;
-  --background-color: #f8fafc;
-  --surface-color: #ffffff;
-  --text-primary: #1e293b;
-  --text-secondary: #64748b;
-  --border-color: #e2e8f0;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --border-radius: 12px;
-  --transition: all 0.2s ease-in-out;
-}
+/* Color, type, shape and glow tokens live in ./styles/tokens.css — this
+   file only styles the App shell itself. */
 
 * {
   box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: var(--background-color);
-  color: var(--text-primary);
-  line-height: 1.6;
 }
 
 .App {
@@ -40,25 +13,39 @@ body {
 }
 
 .App-header {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  color: white;
-  padding: 2rem 1rem;
-  box-shadow: var(--shadow-md);
+  padding: var(--space-10) var(--space-4) var(--space-6);
+}
+
+.App-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto var(--space-3);
+  border-radius: 50%;
+  background: var(--surface-color);
+  border: 2px solid color-mix(in srgb, var(--primary-color) 50%, transparent);
+  box-shadow: var(--glow-primary-sm);
+  animation: fadeInDown 0.6s ease-out;
 }
 
 .App-title {
-  margin: 0 0 0.5rem 0;
-  font-size: 3rem;
-  font-weight: 700;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0 0 var(--space-2) 0;
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-4xl);
+  letter-spacing: var(--letter-spacing-wider);
+  color: var(--primary-color);
+  text-shadow: var(--glow-primary-lg);
   animation: fadeInDown 0.6s ease-out;
 }
 
 .App-subtitle {
   margin: 0;
-  font-size: 1.1rem;
-  font-weight: 400;
-  opacity: 0.9;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
   animation: fadeInUp 0.6s ease-out 0.2s both;
 }
 
@@ -67,16 +54,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem 1rem;
+  padding: var(--space-8) var(--space-4);
   min-height: calc(100vh - 200px);
-}
-
-.App-footer {
-  background-color: var(--surface-color);
-  color: var(--text-secondary);
-  padding: 1.5rem;
-  border-top: 1px solid var(--border-color);
-  font-size: 0.9rem;
 }
 
 /* Screen reader only class */
@@ -105,18 +84,6 @@ body {
 *:focus-visible {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  :root {
-    --primary-color: #0000ff;
-    --secondary-color: #ff6600;
-    --text-primary: #000000;
-    --background-color: #ffffff;
-    --surface-color: #ffffff;
-    --border-color: #000000;
-  }
 }
 
 /* Reduced motion support */
@@ -154,41 +121,28 @@ body {
   }
 }
 
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
-
 /* Responsive design */
 @media (max-width: 768px) {
   .App-title {
-    font-size: 2.5rem;
+    font-size: var(--font-size-3xl);
   }
-  
-  .App-subtitle {
-    font-size: 1rem;
-  }
-  
+
   .App-main {
-    padding: 1rem;
+    padding: var(--space-4);
   }
 }
 
 @media (max-width: 480px) {
   .App-title {
-    font-size: 2rem;
+    font-size: var(--font-size-2xl);
   }
-  
+
   .App-header {
-    padding: 1.5rem 1rem;
+    padding: var(--space-6) var(--space-4);
   }
-  
+
   .App-main {
-    padding: 0.5rem;
+    padding: var(--space-2);
   }
 }
 

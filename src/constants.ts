@@ -68,8 +68,8 @@ export const ANIMATIONS: Animations = {
 export const MESSAGES: Messages = {
   X_TURN: "Player X's turn",
   O_TURN: "Player O's turn",
-  X_WINS: "Player X wins! 🎉",
-  O_WINS: "Player O wins! 🎉",
-  TIE: "It's a tie! 🤝",
+  X_WINS: "Player X wins!",
+  O_WINS: "Player O wins!",
+  TIE: "It's a tie!",
   PLAY_AGAIN: "Play Again",
 } as const; 

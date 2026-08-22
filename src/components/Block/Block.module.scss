@@ -3,41 +3,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--surface-color);
-  border: 2px solid var(--border-color);
-  border-radius: calc(var(--border-radius) - 4px);
+  background: var(--surface-raised-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
   aspect-ratio: 1;
   cursor: pointer;
   transition: var(--transition);
-  font-weight: 700;
-  font-size: 2rem;
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-2xl);
   color: var(--text-primary);
-  box-shadow: var(--shadow-sm);
   overflow: hidden;
 
   // Hover effects for empty blocks
   &:not(.filled):not(.disabled):hover {
-    transform: scale(1.05);
+    transform: scale(1.04);
     border-color: var(--primary-color);
-    box-shadow: var(--shadow-md);
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(245, 158, 11, 0.05) 100%);
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%);
-      opacity: 0;
-      animation: pulse 1.5s infinite;
-    }
+    box-shadow: var(--glow-primary-sm);
   }
 
   // Focus styles for accessibility
   &:focus-visible {
-    outline: 2px solid var(--primary-color);
+    outline: 2px solid var(--secondary-color);
     outline-offset: 2px;
     transform: scale(1.02);
   }
@@ -50,7 +37,6 @@
   // Filled block styles
   &.filled {
     cursor: default;
-    border-width: 3px;
     animation: popIn 0.3s ease-out;
 
     &:hover {
@@ -76,35 +62,32 @@
 
   // Player-specific styles
   &.xPlayer {
-    border-color: var(--primary-color);
+    border-color: color-mix(in srgb, var(--primary-color) 50%, transparent);
     color: var(--primary-color);
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
 
     .value {
-      text-shadow: 0 2px 4px rgba(99, 102, 241, 0.3);
+      text-shadow: var(--glow-primary-md);
     }
   }
 
   &.oPlayer {
-    border-color: var(--secondary-color);
+    border-color: color-mix(in srgb, var(--secondary-color) 50%, transparent);
     color: var(--secondary-color);
-    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
 
     .value {
-      text-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
+      text-shadow: var(--glow-secondary-sm);
     }
   }
 
   // Winning block styles
   &.winning {
-    border-color: #10b981;
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0.1) 100%);
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
-    animation: winningGlow 1s ease-in-out infinite alternate;
+    border-color: var(--accent-color);
+    background: var(--tint-accent-soft);
+    animation: winningGlow 1.4s ease-in-out infinite alternate;
 
     .value {
-      color: #10b981;
-      text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+      color: var(--accent-color);
+      text-shadow: var(--glow-accent-md);
     }
   }
 
@@ -112,48 +95,41 @@
   .value {
     font-size: inherit;
     font-weight: inherit;
-    line-height: 1;
+    line-height: var(--line-height-tight);
     user-select: none;
     transition: var(--transition);
   }
 
   // Responsive design
   @media (max-width: 768px) {
-    font-size: 1.75rem;
-    border-width: 2px;
-
-    &.filled {
-      border-width: 2px;
-    }
+    font-size: var(--font-size-xl);
   }
 
   @media (max-width: 480px) {
-    font-size: 1.5rem;
-    border-width: 1px;
-
-    &.filled {
-      border-width: 2px;
-    }
+    font-size: var(--font-size-lg);
   }
 
-  // High contrast mode support
+  // High contrast mode support — tokens.css already swaps --primary-color /
+  // --secondary-color / --border-color / --text-primary to forced-contrast
+  // values under this same media query, so this block only adds what those
+  // tokens don't cover (border weight, the yellow winning highlight).
   @media (prefers-contrast: high) {
     border-width: 3px;
-    
+
     &.xPlayer {
-      border-color: #0000ff;
-      color: #0000ff;
+      border-color: var(--primary-color);
+      color: var(--primary-color);
     }
-    
+
     &.oPlayer {
-      border-color: #ff6600;
-      color: #ff6600;
+      border-color: var(--secondary-color);
+      color: var(--secondary-color);
     }
-    
+
     &.winning {
-      border-color: #000000;
+      border-color: var(--border-color);
       background: #ffff00;
-      color: #000000;
+      color: var(--text-primary);
     }
   }
 
@@ -161,11 +137,11 @@
   @media (prefers-reduced-motion: reduce) {
     transition: none;
     animation: none;
-    
+
     &:hover {
       transform: none;
     }
-    
+
     &:active {
       transform: none;
     }
@@ -187,24 +163,12 @@
   }
 }
 
-@keyframes pulse {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
 @keyframes winningGlow {
   0% {
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    box-shadow: var(--glow-accent-ring-from);
   }
   100% {
-    box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+    box-shadow: var(--glow-accent-ring-to);
   }
 }
 
