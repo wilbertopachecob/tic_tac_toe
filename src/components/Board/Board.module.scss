@@ -22,6 +22,13 @@
     padding: var(--space-4);
     gap: var(--space-4);
   }
+
+  // Short viewports — see the matching rule in App.css for why this is
+  // height-based, not width-based.
+  @media (max-height: 700px) {
+    padding: var(--space-4);
+    gap: var(--space-3);
+  }
 }
 
 .gameInfo {
@@ -44,12 +51,21 @@
     font-size: var(--font-size-lg);
     min-height: var(--space-8);
   }
+
+  @media (max-height: 700px) {
+    margin-bottom: var(--space-2);
+    min-height: var(--space-8);
+  }
 }
 
 .currentPlayer {
   font-size: var(--font-size-base);
   color: var(--text-secondary);
   margin-bottom: var(--space-4);
+
+  @media (max-height: 700px) {
+    margin-bottom: var(--space-2);
+  }
 
   .playerSymbol {
     font-weight: var(--font-weight-bold);
@@ -76,6 +92,10 @@
   @media (max-width: 480px) {
     max-width: 250px;
     gap: var(--space-2);
+  }
+
+  @media (max-height: 700px) {
+    max-width: 220px;
   }
 }
 
