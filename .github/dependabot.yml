@@ -10,9 +10,9 @@ updates:
       timezone: "UTC"
     open-pull-requests-limit: 10
     reviewers:
-      - "wilbertopachecobatista"
+      - "wilbertopachecob"
     assignees:
-      - "wilbertopachecobatista"
+      - "wilbertopachecob"
     commit-message:
       prefix: "chore"
       prefix-development: "chore"
@@ -35,9 +35,9 @@ updates:
       timezone: "UTC"
     open-pull-requests-limit: 5
     reviewers:
-      - "wilbertopachecobatista"
+      - "wilbertopachecob"
     assignees:
-      - "wilbertopachecobatista"
+      - "wilbertopachecob"
     commit-message:
       prefix: "ci"
       prefix-development: "ci"
